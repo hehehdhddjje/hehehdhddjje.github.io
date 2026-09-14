@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>yt-dlp Enhanced Mod</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { neon: '#b56cff', ink: '#08060f' } } } }
+  </script>
+</head>
+<body class="min-h-screen bg-[#08060f] text-slate-100 selection:bg-purple-400/30">
+  <div class="pointer-events-none fixed inset-0 opacity-30" style="background-image: radial-gradient(circle at 75% 10%, #7c3aed 0, transparent 28%), radial-gradient(circle at 10% 80%, #4c1d95 0, transparent 24%);"></div>
+  <main class="relative mx-auto max-w-6xl px-5 py-8 sm:px-8">
+    <header class="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <div class="mb-2 flex items-center gap-3"><span class="h-3 w-3 animate-pulse rounded-full bg-emerald-400 shadow-[0_0_18px_#34d399]"></span><span class="text-xs font-semibold uppercase tracking-[.3em] text-purple-300">Enhanced Mod / local node</span></div>
+        <h1 class="text-4xl font-black tracking-tight sm:text-5xl">yt-dlp <span class="bg-gradient-to-r from-fuchsia-300 to-purple-500 bg-clip-text text-transparent">Enhanced</span></h1>
+        <p class="mt-3 max-w-xl text-slate-400">Téléchargez, convertissez et regardez vos médias depuis une interface locale.</p>
+      </div>
+      <div class="rounded-2xl border border-purple-400/20 bg-white/[.04] px-4 py-3 text-sm text-slate-400 backdrop-blur"><span class="text-purple-300">●</span> Serveur local <strong class="text-slate-200">127.0.0.1:8000</strong></div>
+    </header>
+
+    <section class="mb-8 rounded-3xl border border-purple-400/25 bg-white/[.06] p-5 shadow-2xl shadow-purple-950/30 backdrop-blur-xl sm:p-7">
+      <div class="mb-5 flex items-center justify-between"><div><h2 class="text-xl font-bold">Nouveau téléchargement</h2><p class="mt-1 text-sm text-slate-400">YouTube, Twitch, TikTok et de nombreuses autres plateformes.</p></div><span class="hidden rounded-full border border-purple-400/30 px-3 py-1 text-xs text-purple-300 sm:block">SECURE LOCAL</span></div>
+      <form id="download-form" class="space-y-4">
+        <div class="flex flex-col gap-3 lg:flex-row"><input id="url" type="url" required placeholder="Collez une URL vidéo ici…" class="min-w-0 flex-1 rounded-2xl border border-white/10 bg-black/30 px-5 py-4 text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20"><button class="rounded-2xl bg-gradient-to-r from-fuchsia-500 to-purple-600 px-7 py-4 font-bold shadow-lg shadow-purple-900/40 transition hover:scale-[1.02] hover:from-fuchsia-400 hover:to-purple-500 disabled:cursor-not-allowed disabled:opacity-50" type="submit">Lancer le téléchargement <span class="ml-1">↗</span></button></div>
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-4"><label class="cursor-pointer"><input class="peer sr-only" type="radio" name="quality" value="best" checked><div class="rounded-2xl border border-white/10 bg-black/20 p-3 text-center transition peer-checked:border-purple-400 peer-checked:bg-purple-500/15"><div class="text-sm font-semibold">Meilleure qualité</div><div class="mt-1 text-xs text-slate-500">Auto</div></div></label><label class="cursor-pointer"><input class="peer sr-only" type="radio" name="quality" value="1080p"><div class="rounded-2xl border border-white/10 bg-black/20 p-3 text-center transition peer-checked:border-purple-400 peer-checked:bg-purple-500/15"><div class="text-sm font-semibold">Full HD</div><div class="mt-1 text-xs text-slate-500">1080p</div></div></label><label class="cursor-pointer"><input class="peer sr-only" type="radio" name="quality" value="720p"><div class="rounded-2xl border border-white/10 bg-black/20 p-3 text-center transition peer-checked:border-purple-400 peer-checked:bg-purple-500/15"><div class="text-sm font-semibold">HD</div><div class="mt-1 text-xs text-slate-500">720p</div></div></label><label class="cursor-pointer"><input class="peer sr-only" type="radio" name="quality" value="audio"><div class="rounded-2xl border border-white/10 bg-black/20 p-3 text-center transition peer-checked:border-purple-400 peer-checked:bg-purple-500/15"><div class="text-sm font-semibold">Audio MP3</div><div class="mt-1 text-xs text-slate-500">192 kbps</div></div></label></div>
+      </form>
+      <div id="job-panel" class="mt-5 hidden rounded-2xl border border-purple-400/20 bg-purple-950/20 p-4"><div class="mb-2 flex justify-between text-sm"><span id="job-message" class="text-slate-300">En attente…</span><span id="job-percent" class="font-bold text-purple-300">0%</span></div><div class="h-2 overflow-hidden rounded-full bg-black/40"><div id="progress" class="h-full w-0 rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-500 transition-all"></div></div><div id="job-meta" class="mt-2 text-xs text-slate-500"></div></div>
+    </section>
+
+    <section><div class="mb-4 flex items-end justify-between"><div><h2 class="text-2xl font-bold">Bibliothèque locale</h2><p class="mt-1 text-sm text-slate-500">Vos fichiers sont servis uniquement par ce serveur.</p></div><button id="refresh" class="rounded-xl border border-white/10 px-3 py-2 text-sm text-slate-400 transition hover:border-purple-400/50 hover:text-white">↻ Actualiser</button></div><div id="library" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"><div class="col-span-full rounded-2xl border border-dashed border-white/10 p-10 text-center text-slate-500">Chargement de la bibliothèque…</div></div></section>
+    <footer class="mt-14 border-t border-white/10 pt-5 text-center text-xs text-slate-600">yt-dlp Enhanced Mod · fichiers stockés dans <code class="text-purple-400/70">./downloads</code></footer>
+  </main>
+<script>
+const $ = id => document.getElementById(id);
+const formatSize = bytes => { if (!bytes) return '0 B'; const units=['B','KB','MB','GB']; const i=Math.floor(Math.log(bytes)/Math.log(1024)); return `${(bytes/Math.pow(1024,i)).toFixed(i?1:0)} ${units[i]}`; };
+async function loadFiles() { const res=await fetch('/api/files'); const data=await res.json(); const lib=$('library'); if(!data.files.length){lib.innerHTML='<div class="col-span-full rounded-2xl border border-dashed border-white/10 p-10 text-center text-slate-500">Aucun fichier téléchargé pour le moment.</div>';return;} lib.innerHTML=data.files.map(f=>`<article class="group overflow-hidden rounded-2xl border border-white/10 bg-white/[.04] transition hover:-translate-y-1 hover:border-purple-400/50"><div class="relative flex h-32 items-center justify-center bg-gradient-to-br from-purple-950 to-slate-950"><span class="text-4xl">${f.is_audio?'♫':'▶'}</span><a href="${f.url}" target="_blank" class="absolute inset-0 flex items-center justify-center bg-purple-900/70 opacity-0 transition group-hover:opacity-100"><span class="rounded-full bg-white px-4 py-2 text-sm font-bold text-purple-950">Ouvrir</span></a></div><div class="p-4"><h3 class="truncate font-semibold" title="${f.name}">${f.name}</h3><p class="mt-2 text-xs text-slate-500">${formatSize(f.size)} · ${f.is_audio?'Audio':'Vidéo'}</p></div></article>`).join(''); }
+async function poll(jobId){ const res=await fetch(`/api/jobs/${jobId}`); const j=await res.json(); $('job-panel').classList.remove('hidden'); $('job-message').textContent=j.message||j.status; $('job-percent').textContent=j.percent||'0%'; $('progress').style.width=j.percent||'0%'; $('job-meta').textContent=j.speed&&j.speed!=='-'?`Vitesse ${j.speed} · ETA ${j.eta}`:''; if(['completed','error'].includes(j.status)){ $('download-form').querySelector('button').disabled=false; if(j.status==='error') $('job-message').className='text-red-300'; else setTimeout(loadFiles,500); return; } setTimeout(()=>poll(jobId),800); }
+$('download-form').addEventListener('submit',async e=>{e.preventDefault(); const button=e.target.querySelector('button'); button.disabled=true; $('job-message').className='text-slate-300'; $('job-panel').classList.remove('hidden'); $('job-message').textContent='Mise en file…'; const res=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:$('url').value,quality:document.querySelector('input[name=quality]:checked').value})}); const data=await res.json(); if(!res.ok){$('job-message').textContent=data.detail||'Erreur';button.disabled=false;return;} poll(data.job_id); });
+$('refresh').addEventListener('click',loadFiles); loadFiles();
+</script>
+</body>
+</html>
