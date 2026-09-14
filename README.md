@@ -1,30 +1,13 @@
-# yt-dlp Enhanced Mod
+# CrowX
 
 Site public : https://hehehdhddjje.github.io/
 
-## Important
+CrowX est un workspace mobile de pentest défensif et de documentation pour les audits autorisés. Il permet de définir une mission, son périmètre, les modules de travail et une méthodologie de remédiation.
 
-GitHub Pages héberge uniquement l’interface statique. Il ne peut pas exécuter Python, FastAPI, FFmpeg ou yt-dlp. Les téléchargements sont donc exécutés par le serveur local inclus dans ce dépôt.
+## Règle d’utilisation
 
-## Lancer le serveur local
+Utiliser uniquement sur des systèmes dont vous êtes propriétaire ou pour lesquels vous disposez d’une autorisation explicite. Le site GitHub Pages est une interface statique : il ne lance aucun scan à distance.
 
-Sous Ubuntu/Debian :
+## Publication
 
-```bash
-sudo apt update
-sudo apt install -y python3 python3-venv ffmpeg
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-python app.py
-```
-
-Ensuite, ouvre https://hehehdhddjje.github.io/ ou http://127.0.0.1:8000/. Les fichiers téléchargés sont enregistrés dans `downloads/`.
-
-## Structure
-
-- `index.html` : interface publiée sur GitHub Pages ;
-- `app.py` : serveur FastAPI local ;
-- `templates/index.html` : interface complète du serveur local ;
-- `requirements.txt` : dépendances Python ;
-- `downloads/` : fichiers téléchargés localement.
+Le site est hébergé par GitHub Pages depuis la branche `main`. Les modifications de `index.html` et du logo sont publiées automatiquement après un `git push`.
