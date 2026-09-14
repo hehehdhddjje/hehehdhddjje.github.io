@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hehehdhddjje.github.io/sitemap.xml
